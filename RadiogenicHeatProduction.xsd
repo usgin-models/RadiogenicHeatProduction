@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2010 rel. 3 (x64) (http://www.altova.com) by Ryan Clark (private) -->
+<xs:schema xmlns:aasg="http://stategeothermaldata.org/uri-gin/aasg/xmlschema/radiogenicheatproduction/0.5" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml" xmlns:gmlsf="http://www.opengis.net/gmlsf" targetNamespace="http://stategeothermaldata.org/uri-gin/aasg/xmlschema/radiogenicheatproduction/0.5" elementFormDefault="qualified" version="1.08">
+	<xs:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"/>
+	<xs:import namespace="http://www.opengis.net/gmlsf" schemaLocation="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd"/>
+	<xs:annotation>
+		<!-- This XSD document, including XML schema, indicates the content requested for AASG geothermal data interoperable web services for description Radiogenic Heat Production based on analysis of individual rock samples. Calculation of heat production is based on measured U, Th, and K content, which may derive from chemical analysis, gamma ray spectral analysis or other techniques. Measurement procedures, including instruments used, standards used to calibrate calculation of U, Th, and K, assumptions in calculation of heat production from radiogenic element concentrations, etc. should be carefully described in the Measurement procedure field. -->
+		<!--This XSD document was created on 2013-01-07 by Christy Caudill, AZGS.-->
+		<xs:appinfo source="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd">
+			<gmlsf:ComplianceLevel>0</gmlsf:ComplianceLevel>
+			<gmlsf:GMLProfileSchema>
+http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gmlsf:GMLProfileSchema>
+		</xs:appinfo>
+	</xs:annotation>
+	<xs:element name="RadiogenicHeatProduction" type="aasg:RadiogenicHeatProductionType" substitutionGroup="gml:_Feature"/>
+	<xs:complexType name="RadiogenicHeatProductionType">
+		<xs:complexContent>
+			<xs:extension base="gml:AbstractFeatureType">
+				<xs:sequence>
+					<xs:element name="OBJECTID" type="xs:int" minOccurs="0"/>
+					<xs:element name="ObservationURI">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="ObservationName" type="xs:string"/>
+					<xs:element name="SpecimenLabel" type="xs:string"/>
+					<xs:element name="SpecimenURI" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="GeologicUnitName" type="xs:string"/>
+					<xs:element name="FeatureOfInterestURI" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="LithologyTerm" type="xs:string" minOccurs="0"/>
+					<xs:element name="RockName" type="xs:string"/>
+					<xs:element name="SamplingFeatureURI" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="SamplingFeatureName" type="xs:string"/>
+					<xs:element name="SampleCollectionDate" type="xs:string" minOccurs="0"/>
+					<xs:element name="LocalityTerms" type="xs:string" minOccurs="0"/>
+					<xs:element name="TectonicProvince" type="xs:string" minOccurs="0"/>
+					<xs:element name="County" type="xs:string"/>
+					<xs:element name="State" type="xs:string"/>
+					<xs:element name="PLSS_Meridians" type="xs:string" minOccurs="0"/>
+					<xs:element name="Township" type="xs:string" minOccurs="0"/>
+					<xs:element name="Range" type="xs:string" minOccurs="0"/>
+					<xs:element name="Section_" type="xs:string" minOccurs="0"/>
+					<xs:element name="SectionPart" type="xs:string" minOccurs="0"/>
+					<xs:element name="LatDegree" type="xs:double"/>
+					<xs:element name="LongDegree" type="xs:double"/>
+					<xs:element name="SRS" type="xs:string"/>
+					<xs:element name="LocationUncertaintyStatement" type="xs:string" minOccurs="0"/>
+					<xs:element name="ElevationDatum_m" type="xs:double" minOccurs="0"/>
+					<xs:element name="SampleDepth_m" type="xs:double" minOccurs="0"/>
+					<xs:element name="SampleMeasurementDate" type="xs:string" minOccurs="0"/>
+					<xs:element name="SampleType" type="xs:string"/>
+					<xs:element name="SampleMass_kg" type="xs:double"/>
+					<xs:element name="OverburdenThickness_m" type="xs:double" minOccurs="0"/>
+					<xs:element name="SampleDensity_g-cc" type="xs:double" minOccurs="0"/>
+					<xs:element name="UncertainDensity" type="xs:string" minOccurs="0"/>
+					<xs:element name="Laboratory" type="xs:string" minOccurs="0"/>
+					<xs:element name="LaboratoryURI" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="RadioactivityMeasurementDevice" type="xs:string"/>
+					<xs:element name="MeasurementProcedure" type="xs:string" minOccurs="0"/>
+					<xs:element name="SampleCureDuration" type="xs:string" minOccurs="0"/>
+					<xs:element name="MeasurementCount" type="xs:string"/>
+					<xs:element name="Uranium" type="xs:double"/>
+					<xs:element name="Thorium" type="xs:double"/>
+					<xs:element name="Potassium" type="xs:double"/>
+					<xs:element name="HeatProduction_mWm3" type="xs:double"/>
+					<xs:element name="HeatProductionUncertainty" type="xs:string"/>
+					<xs:element name="Notes" type="xs:string" minOccurs="0"/>
+					<xs:element name="MetadataURI" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="Source" type="xs:string"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>
