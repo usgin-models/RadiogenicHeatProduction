@@ -5,7 +5,7 @@
 	<xs:import namespace="http://www.opengis.net/gmlsf" schemaLocation="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd"/>
 	<xs:annotation>
 		<!-- This XSD document, including XML schema, indicates the content requested for AASG geothermal data interoperable web services for description Radiogenic Heat Production based on analysis of individual rock samples. Calculation of heat production is based on measured U, Th, and K content, which may derive from chemical analysis, gamma ray spectral analysis or other techniques. Measurement procedures, including instruments used, standards used to calibrate calculation of U, Th, and K, assumptions in calculation of heat production from radiogenic element concentrations, etc. should be carefully described in the Measurement procedure field. -->
-		<!--This XSD document was created on 2013-01-07 by Christy Caudill, AZGS.-->
+		<!--Annotated version 0.5.1. This XSD document was created on 2013-01-07 by Christy Caudill, AZGS. Field Description annotations standardized 2013-08-22 by Esty Pape, AZGS.-->
 		<xs:appinfo source="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd">
 			<gmlsf:ComplianceLevel>0</gmlsf:ComplianceLevel>
 			<gmlsf:GMLProfileSchema>
@@ -17,90 +17,276 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 		<xs:complexContent>
 			<xs:extension base="gml:AbstractFeatureType">
 				<xs:sequence>
-					<xs:element name="OBJECTID" type="xs:int" minOccurs="0"/>
+					<xs:element name="OBJECTID" type="xs:int" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Integer record count, added by ArcGIS servers during service deployment; not required but cannot be removed when deploying from ArcGIS feature class. Not user maintained, so this element appears in XML implementation but not in the Content Model Template.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="ObservationURI">
+						<xs:annotation>
+							<xs:documentation>Unique identifier for this observation. This is the identifier (Uniform Resource Identifier) that will be used to cross-reference data, samples, and other observations to the observation represented by this record. Best practice is to define an http URI that will dereference to a normative description of the observation. USGIN URI's may be redirected to any URL using the http://resources.usgin.org redirector; contact the USGIN development team at AZGS for instructions.  </xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="ObservationName" type="xs:string"/>
-					<xs:element name="SpecimenLabel" type="xs:string"/>
+					<xs:element name="ObservationName" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Common or human-readable name by which the feature  is known. Recommend using only web-safe characters (a-z A-Z 0-9 _-.) in the name. Be consistent in the naming convention used within any given dataset.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SpecimenLabel" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Short text string to identify/characterize the samples used in this observation; may include one or more sample names as provided by the sample collector or analyzing laboratory.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="SpecimenURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Unique identifier for sample; should include protocol prefix with known meaning, delimited by a ':' (colon), e.g. igsn:24623570 or http://resources.usgin.org/uri-gin/AZGS/sample/24623570.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="GeologicUnitName" type="xs:string"/>
+					<xs:element name="GeologicUnitName" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Name of geologic unit that was sampled. Include hierarchy of names if the unit is part of a higher-rank geologic unit, e.g. Group name/Formation name, or Formation/Member, or Group/ Formation. Spell out unit names in full.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="FeatureOfInterestURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Unique identifier that specifies the feature represented: e.g. a geologic feature, aquifer or facility structure. Ideally, the identifier is an http URI that will dereference to a known, useful representation of the feature. This identifier will be used to cross reference the feature to other information related to this feature.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="LithologyTerm" type="xs:string" minOccurs="0"/>
-					<xs:element name="RockName" type="xs:string"/>
+					<xs:element name="LithologyTerm" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Description of the lithology of surface geology or geologic column for well interval, e.g. arkose, granite, limestone, sandstone, schist. Recommend using CGI simple lithology vocabulary (see tab in this workbook). Use to account for EarthChem Material, EarthChem Type, EarthChem Composition, alluvium, 36-40': gravels; etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RockName" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Free text name for lithology category of sample, e.g. biotite-hornblende granite, lithofeldspathic sandstone, calcareous arkose, biotite schist.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="SamplingFeatureURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Unique Identifier for the particular site (station) or well where the sample(s) came from. For wells, this might be the HeaderURI or API number used in other metadata files. If unavailable, state 'missing'. SamplingFeature is a concept that represents the feature that accesses the part of the Earth from which the sample came, e.g. outcrop, borehole, dredge haul.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="SamplingFeatureName" type="xs:string"/>
-					<xs:element name="SampleCollectionDate" type="xs:string" minOccurs="0"/>
-					<xs:element name="LocalityTerms" type="xs:string" minOccurs="0"/>
-					<xs:element name="TectonicProvince" type="xs:string" minOccurs="0"/>
-					<xs:element name="County" type="xs:string"/>
-					<xs:element name="State" type="xs:string"/>
-					<xs:element name="PLSS_Meridians" type="xs:string" minOccurs="0"/>
-					<xs:element name="Township" type="xs:string" minOccurs="0"/>
-					<xs:element name="Range" type="xs:string" minOccurs="0"/>
-					<xs:element name="Section_" type="xs:string" minOccurs="0"/>
-					<xs:element name="SectionPart" type="xs:string" minOccurs="0"/>
-					<xs:element name="LatDegree" type="xs:double"/>
-					<xs:element name="LongDegree" type="xs:double"/>
-					<xs:element name="SRS" type="xs:string"/>
-					<xs:element name="LocationUncertaintyStatement" type="xs:string" minOccurs="0"/>
-					<xs:element name="ElevationDatum_m" type="xs:double" minOccurs="0"/>
-					<xs:element name="SampleDepth_m" type="xs:double" minOccurs="0"/>
-					<xs:element name="SampleMeasurementDate" type="xs:string" minOccurs="0"/>
-					<xs:element name="SampleType" type="xs:string"/>
-					<xs:element name="SampleMass_kg" type="xs:double"/>
-					<xs:element name="OverburdenThickness_m" type="xs:double" minOccurs="0"/>
-					<xs:element name="SampleDensity_g-cc" type="xs:double" minOccurs="0"/>
-					<xs:element name="UncertainDensity" type="xs:string" minOccurs="0"/>
-					<xs:element name="Laboratory" type="xs:string" minOccurs="0"/>
+					<xs:element name="SamplingFeatureName" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Human-intelligible name of sample location, e.g.  well, outcrop, 'Exxon 1 Cochise well', 'Outcrop on Hwy 63 mile marker 125' etc. from which the specimen was obtained. If missing, use OGC nil value (see OGC_nilValues tab).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SampleCollectionDate" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Date for the record (date on which observation, measurement or test was made or specimen was collected. Day, month and year must be specified; Excel will display using ISO 8601 date and time (yyyy-mm-ddT:hh:mm) format. If only the year is known, enter month and day as 'Jan. 1', (or '1/1/', or '1-1-', or 'January 1,'). All dates will be converted to yyyy-mm-ddThh:mm.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LocalityTerms" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Additional information or more geographic names associated with sample collection location; if multiple names supplied, delimit with pipe '|' character, e.g. Arizona | La Paz County | Harquahala Mountains | Browns Canyon.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TectonicProvince" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Tectonic division of a region based on geology.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="County" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Required. County name. If unknown or not applicable use 'missing'. If offshore, specify 'offshore' in this field.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="State" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Required. State name without abbreviations. If unknown or not applicable use 'missing'. For offshore locations, specify the governing or nearest state and list the county as 'offshore'.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="PLSS_Meridians" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>List north-south baseline and east-west meridian that Townships and Ranges are referenced to.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Township" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Township in PLSS grid, relative to reported baseline. Formatting and punctuation should be consistent for all locations referenced to the same baseline and meridian. Recommend adding leading '0's so that all number strings are the same length (typically 2 or occasionally 3 digits). Examples 01N, 112S, 001N.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Range" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Range in PLSS grid, relative to reported meridian. Formatting and punctuation should be consistent for all locations referenced to the same baseline meridian. See instructions on TWP field.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Section_" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>PLSS section number. Must be numeric or null. Some surveys include half sections indicated by a 'nn.5' designation, where n indicates a number.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SectionPart" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Subdivision of a PLSS section.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LatDegree" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Latitude coordinate for the surface location of the feature (use center point for areas); values should be provided with at least 4 significant digits for sufficient precision (7 decimal places is recommended by the USGS (OFR 02-463, p. 6). Use decimal degrees.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LongDegree" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Longitude coordinate for the surface location of the feature (use center point for areas); values should be provided with at least 4 significant digits for sufficient precision (7 decimal places is recommended by the USGS (OFR 02-463, p. 6). Use decimal degrees.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SRS" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>The spatial reference system. It is recommended that an EPSG code be used to identify the SRS used to specify the location.  If an EPSG code is used, identify it as such with the prefix 'EPSG:' For common EPSG codes, see the Data Valid Terms tab. EPSG:4326 is the identifier for WGS84, and should be the text in this field. EPSG stands for European Petroleum Survey Group. EPSSG codes can be dereferenced by putting the code in this URL (replace 4326) http://spatialreference.org/ref/epsg/4326/.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LocationUncertaintyStatement" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Information on how the original location was determined, e.g.: 1:250,000 map, gps unit, Google Earth, PLSS Conversion, Spatial Datum Conversion, e.g., NAD27 to WGS84.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ElevationDatum_m" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The point of reference against which elevation measurements are made. Best practice: use mean sea level (MSL) as datum.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SampleDepth_m" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>If sample is from the surface enter zero, else put depth of formation sampled. Convert units to meters for data delivery.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SampleMeasurementDate" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Date for the record (date on which observation, measurement or test was made or specimen was collected. Day, month and year must be specified; Excel will display using ISO 8601 date and time (yyyy-mm-ddT:hh:mm) format. If only the year is known, enter month and day as 'Jan. 1', (or '1/1/', or '1-1-', or 'January 1,'). All dates will be converted to yyyy-mm-ddThh:mm.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SampleType" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Type of material used for sample measurement. Category from simple material classification scheme e.g. rock, sediment, liquid, gas, biological material. DataValidTerms tab includes vocabulary used by SESAR (http://www.geosamples.org/), which is recommended for use here.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SampleMass_kg" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Weight of Sample measured. Convert units to kilograms.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="OverburdenThickness_m" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>If SampleType is surface in situ measurement, provide thickness of soil overburden at collection. Convert units to meters.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SampleDensity_g-cc" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Density of the rock sample or Bulk Density for Crushed/Cutting samples. Convert units to grams/cubic cm.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="UncertainDensity" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Free text qualitative or quantitative statement regarding the accuracy of the sample density or the method used to determine.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Laboratory" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>If a Laboratory performed the analysis, include name and address here.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="LaboratoryURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Unique identifier (if available) for the laboratory where the analysis was performed.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="RadioactivityMeasurementDevice" type="xs:string"/>
-					<xs:element name="MeasurementProcedure" type="xs:string" minOccurs="0"/>
-					<xs:element name="SampleCureDuration" type="xs:string" minOccurs="0"/>
-					<xs:element name="MeasurementCount" type="xs:string"/>
-					<xs:element name="Uranium" type="xs:double"/>
-					<xs:element name="Thorium" type="xs:double"/>
-					<xs:element name="Potassium" type="xs:double"/>
-					<xs:element name="HeatProduction_mWm3" type="xs:double"/>
-					<xs:element name="HeatProductionUncertainty" type="xs:string"/>
-					<xs:element name="Notes" type="xs:string" minOccurs="0"/>
+					<xs:element name="RadioactivityMeasurementDevice" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Type of analysis/tool used on sample for the measurement: e.g. Gamma Ray Spectrometer-hand held, Gamma Ray Spectrometer - Laboratory, FUS-ICP, FUS-MS, other. If 'other', provide additional information in the MeasurementProcedure. Include device model number if available.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="MeasurementProcedure" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Text description of how the measurement was made - instrumentation, logging rate, correction or extrapolation process, how time since circulation was determined, etc. Methodology of radioactivity heat production measurement technique. If following a paper or standard include reference. Data provider should indicate QA/QC performed on the data, including individual or institution, time frame and depth of quality check. If device used was 'other', provide specific information here. Model name/number of any measurement device used may optionally be provided. Include sample preparation procedure (e.g. equilibration time for Rn decay), standards used to convert gamma ray counts to U,Th, K concentrations, gamma ray energies measured. Might include citation to published description of procedure if that is in a long-term persistent location.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SampleCureDuration" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Duration of time between sample collection and measurement completion (in days).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="MeasurementCount" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Total number of measurements made on this sample. Default is 1.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Uranium" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Measured Uranium Value in ppm. -999 if not measured.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Thorium" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Measured Thorium Value in ppm. -999 if not measured.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Potassium" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Measured Potassium Value expressed as a percentage. -999 if not measured, otherwise valid values are between 0 and 100.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="HeatProduction_mWm3" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Heat production value using procedure described in MeasurementProcedure field. Convert units to μW/m-3.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="HeatProductionUncertainty" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Free text qualitative or quantitative statement regarding the accuracy of the Heat Production Calculated Value and the method to determine the value. For example: Formula used (0.0000967*Uranium in ppm+0.0000263*Thorium in ppm+0.0035*(Potassium%/100))*Density in g/cm3.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Notes" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Any additional information to be provided, including description and other data not captured by the template, details about collection method, measurements, contact information for related parties (original collector, project PI), collection platform or Launch, etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="MetadataURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>URI identifying (and ideally dereferencing to get) a full formal metadata record for the observation report. A time series of observations may all reference the same metadata record that provides contact information and details on procedure, etc.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="Source" type="xs:string"/>
-					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:element name="Source" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Mandatory. Short text explanation of source of information defining feature; may be author-date type citation, but should include some indication of how digital data originated. If unpublished data, provide researcher name, date and research institution for proper citation. Separate multiple citations with pipe ('|') character.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Shape" type="gml:PointPropertyType">
+						<xs:annotation>
+							<xs:documentation>Added by GIS for WFS service; this element appears in the xml output, but is generated during service deployment from the latitude and longitude, therefore it doesn't appear in the template.</xs:documentation>
+						</xs:annotation>
+						</xs:element>
 					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 			</xs:extension>
