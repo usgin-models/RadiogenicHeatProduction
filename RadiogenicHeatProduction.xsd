@@ -192,7 +192,7 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 							<xs:documentation>If SampleType is surface in situ measurement, provide thickness of soil overburden at collection. Convert units to meters.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="SampleDensity_g-cc" type="xs:double" minOccurs="0">
+					<xs:element name="SampleDensity_g_cc" type="xs:double" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Density of the rock sample or Bulk Density for Crushed/Cutting samples. Convert units to grams/cubic cm.</xs:documentation>
 						</xs:annotation>
